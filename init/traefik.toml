@@ -1,0 +1,19 @@
+defaultEntryPoints = ["http", "https"]
+logLevel = "ERROR"
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = "/certs/homelab.crt"
+      keyFile = "/certs/homelab.key"
+
+[ping]
+  # Name of the related entry point
+  #   Optional - Default: "traefik"
+  entryPoint = "https"
